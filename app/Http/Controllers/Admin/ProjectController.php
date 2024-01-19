@@ -20,16 +20,14 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $technologies = config('technologies.key');
-
         $currentUserId = Auth::id();
         if ($currentUserId == 1) {
-            $project = Project::paginate(3);
+            $projects = Project::paginate(3);
         } else {
-            $project = Project::where('user_id', $currentUserId)->paginate(3);
+            $projects = Project::where('user_id', $currentUserId)->paginate(3);
         }
 
-        return view('admin.projects.index', compact('projects', 'technologies'));
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -78,8 +76,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        // $project->technologies = explode(',', $project->technologies);
-        return view('admin.projects.show', compact('project'));
+        $currentUserId = Auth::id();
+        if ($currentUserId == $project->user_id || $currentUserId == 1) {
+            return view('admin.projects.show', compact('project'));
+        }
+        abort(403);
     }
 
     /**
@@ -87,6 +88,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $currentUserId = Auth::id();
+        if ($currentUserId != $project->user_id && $currentUserId != 1) {
+            abort(403);
+        }
         $categories = Category::all();
         // $technologies = config('technologies.key');
         $technologies = Technology::all();
@@ -108,8 +113,8 @@ class ProjectController extends Controller
             if ($project->img) {
                 Storage::delete($project->img);
             }
-            $path = Storage::put('uploads', $request->file('img'));
-            $formData['img'] = $path;
+            $path = Storage::put('images', $request->file('images'));
+            $formData['images'] = $path;
         }
         /*
         if($request->input('technologies')){
@@ -126,7 +131,7 @@ class ProjectController extends Controller
             $project->technologies()->detach();
         }
 
-        return to_route('admin.projects.show', $project);
+        return to_route('admin.projects.show', $project->slug);
     }
 
     /**
@@ -134,8 +139,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        if ($project->img) {
-            Storage::delete($project->img);
+        if ($project->image) {
+            Storage::delete($project->image);
         }
 
         $project->technologies()->detach();
