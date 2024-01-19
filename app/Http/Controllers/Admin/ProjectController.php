@@ -22,12 +22,11 @@ class ProjectController extends Controller
     {
         $technologies = config('technologies.key');
 
-        if ($request->query('technologies')) {
-            $projects = Project::where('technologies', 'like', '%'.$request->query('technologies').'%')->get();
-        } elseif ($request->query('search')) {
-            $projects = Project::where('title', 'like', '%'.$request->query('search').'%')->get();
+        $currentUserId = Auth::id();
+        if ($currentUserId == 1) {
+            $project = Project::paginate(3);
         } else {
-            $projects = Project::paginate(3);
+            $project = Project::where('user_id', $currentUserId)->paginate(3);
         }
 
         return view('admin.projects.index', compact('projects', 'technologies'));
