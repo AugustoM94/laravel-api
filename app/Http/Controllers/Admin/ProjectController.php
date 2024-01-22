@@ -36,7 +36,6 @@ class ProjectController extends Controller
     public function create()
     {
         $categories = Category::all();
-        // $technologies = config('technologies.key');
         $technologies = Technology::all();
 
         return view('admin.projects.create', compact('categories', 'technologies'));
@@ -48,14 +47,14 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $formData = $request->validated();
-        $slug = Str::slug($formData['title'], '-');
+        $slug = Project::getSlug($formData['title']);
         $formData['slug'] = $slug;
         $user_id = Auth::id();
         $formData['user_id'] = $user_id;
 
-        if ($request->hasFile('img')) {
-            $path = Storage::put('uploads', $request->file('img'));
-            $formData['img'] = $path;
+        if ($request->hasFile('image')) {
+            $path = Storage::put('images', $request->file('image'));
+            $formData['image'] = $path;
         }
         /*
         if($request->input('technologies')){
@@ -109,12 +108,12 @@ class ProjectController extends Controller
         $formData['slug'] = $slug;
         $formData['user_id'] = $project->user_id;
 
-        if ($request->hasFile('img')) {
-            if ($project->img) {
-                Storage::delete($project->img);
+        if ($request->hasFile('image')) {
+            if ($project->image) {
+                Storage::delete($project->image);
             }
-            $path = Storage::put('images', $request->file('images'));
-            $formData['images'] = $path;
+            $path = Storage::put('images', $request->file('image'));
+            $formData['image'] = $path;
         }
         /*
         if($request->input('technologies')){
