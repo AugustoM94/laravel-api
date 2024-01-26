@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="container">
-        <h1 class="my-4 text-danger">technologies List</h1>
+        <h1 class="my-4 text-danger">Technologies List</h1>
 
         <a href="{{ route('admin.technologies.create') }}" class="btn btn-danger mb-4">Add technology</a>
 
