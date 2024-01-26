@@ -14,14 +14,12 @@
                 <tr>
                     <th>Title</th>
                     <th>Actions</th>
-                    <th>Additional Links</th> <!-- Nuova colonna per i link aggiuntivi -->
                 </tr>
             </thead>
             <tbody>
                 @foreach($categories as $category)
                     <tr>
-                        <td>{{ $category->title }}</td>
-                          <td><a href="{{ $category->link }}">{{ $category->link }}</a></td>
+                        <td>{{ $category->name }}</td>
                         <td>
                             <a href="{{ route('admin.categories.show', $category) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                             <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -31,7 +29,7 @@
                                 <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                             </form>
                         </td>
-                      
+
                     </tr>
                 @endforeach
             </tbody>

@@ -21,7 +21,19 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
     </div>
-    
+    <div class="mb-3">
+            <label for="category_id">Select Category</label>
+            <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
+                <option value="">Select a category</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                @endforeach
+            </select>
+            @error('category_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+    </div>
+
          <div class="mb-3 text-white">
             <label for="link">link</label>
             <input type="url" class="form-control @error('link') is-invalid @enderror" name="link" id="link"               >

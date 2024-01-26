@@ -13,7 +13,7 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
     </div>
-<div class="mb-3">
+    <div class="mb-3">
             <label for="category_id">Select Category</label>
             <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
                 <option value="">Select a category</option>
@@ -42,7 +42,7 @@
                 @enderror
     </div>
     <div class="mb-3 text-white">
-    @foreach ($technologies as $item)
+         @foreach ($technologies as $item)
                 <div class="d-inline-block m-3 @error('technologies') is-invalid @enderror">
                     @if ($errors->any())
                         <input type="checkbox" name="technologies[]" value="{{ $item->id }}"

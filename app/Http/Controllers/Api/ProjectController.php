@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Project;
-use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -17,9 +15,7 @@ class ProjectController extends Controller
             [
                 'success' => true,
                 'result' => $projects,
-/*                 'technologies' => Technology::all(),
-                'categories' => Category::all(),
- */]
+             ]
         );
     }
 

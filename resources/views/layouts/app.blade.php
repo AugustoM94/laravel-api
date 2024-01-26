@@ -25,7 +25,7 @@
 
         <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-dark">
             <div class="container">
-                
+
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -40,6 +40,13 @@
                        <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('admin.projects.index') }}">Projects</a>
                         </li>
+                       <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('admin.categories.index') }}">Categories</a>
+                        </li>
+                       <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('admin.technologies.index') }}">Technologies</a>
+                        </li>
+
 
                     </ul>
 
