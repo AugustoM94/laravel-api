@@ -4,7 +4,7 @@
 <section class="container">
         <h1 class="my-4 text-info">Technologies List</h1>
 
-        <a href="{{ route('admin.technologies.create') }}" class="btn btn-info mb-4">Add technology</a>
+        <a href="{{ route('admin.technologies.create') }}" class="btn btn-info mb-4">Add Technology</a>
 
         @if(session()->has('message'))
             <div class="alert alert-success mt-4">{{ session()->get('message') }}</div>
