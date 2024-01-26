@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <section class="container">
-        <h1 class="my-4 text-danger">Categories List</h1>
+        <h1 class="my-4 text-warning">Categories List</h1>
 
-        <a href="{{ route('admin.categories.create') }}" class="btn btn-danger mb-4">Add Category</a>
+        <a href="{{ route('admin.categories.create') }}" class="btn btn-warning mb-4">Add Category</a>
 
         @if(session()->has('message'))
             <div class="alert alert-success mt-4">{{ session()->get('message') }}</div>
